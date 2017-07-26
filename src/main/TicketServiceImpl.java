@@ -57,7 +57,7 @@ public class TicketServiceImpl implements TicketService {
       }
 
       idToSeatHoldMap.put(hold.getId(), hold);
-      Runnable r = new ExpiredHoldChecker(hold.getId(), numOfSecondsUntilHoldExpires, this, idToSeatHoldMap);
+      Runnable r = new ExpiredHoldChecker(hold.getId(), numOfSecondsUntilHoldExpires, this, idToSeatHoldMap, beginningSeats);
       new Thread(r).start();
     }
 

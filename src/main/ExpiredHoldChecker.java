@@ -1,18 +1,21 @@
 package main;
 
 import java.util.HashMap;
+import java.util.TreeSet;
 
 public class ExpiredHoldChecker implements Runnable {
   private int seatHoldId;
   private int numOfSecondsUntilHoldExpires;
   private TicketServiceImpl ticketService;
   private HashMap<Integer, SeatHold> idToSeatHoldMap;
+  TreeSet<Integer> beginningSeats;
 
-   public ExpiredHoldChecker(int seatHoldId, int numOfSecondsUntilHoldExpires, TicketServiceImpl ticketService, HashMap<Integer, SeatHold> idToSeatHoldMap) {
+   public ExpiredHoldChecker(int seatHoldId, int numOfSecondsUntilHoldExpires, TicketServiceImpl ticketService, HashMap<Integer, SeatHold> idToSeatHoldMap, TreeSet<Integer> beginningSeats) {
      this.seatHoldId = seatHoldId;
      this.numOfSecondsUntilHoldExpires = numOfSecondsUntilHoldExpires;
      this.ticketService = ticketService;
      this.idToSeatHoldMap = idToSeatHoldMap;
+     this.beginningSeats = beginningSeats;
    }
 
    public void run() {
@@ -27,6 +30,7 @@ public class ExpiredHoldChecker implements Runnable {
        if(hold.getSeatStatus(ticketService.getSeatArray()) == SeatStatus.HELD) {
          hold.setSeatStatus(ticketService.getSeatArray(), SeatStatus.FREE);
          ticketService.addFreeSeats(hold.getNumOfSeats());
+         beginningSeats.add(hold.getFirstSeat());
          idToSeatHoldMap.remove(seatHoldId);
        }
      }

@@ -15,7 +15,8 @@ public class SeatHold {
     seats.add(seatNumber);
   }
 
-  public int getId() { // Use the first seat number as the ID since only one SeatHold can be assoaicated to a seat number
+  // Use the first seat number as the ID since only one SeatHold can be assoaicated to a seat number
+  public int getId() {
     return seats.peekFirst();
   }
 
@@ -35,6 +36,10 @@ public class SeatHold {
 
   public int getNumOfSeats() {
     return seats.size();
+  }
+
+  public int getFirstSeat() {
+    return seats.peekFirst();
   }
 
 }
