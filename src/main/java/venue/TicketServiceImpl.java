@@ -30,7 +30,7 @@ public class TicketServiceImpl implements TicketService {
 
   public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
     if(numSeats == 0 || !isValidEmail(customerEmail)) {
-      System.out.println("Please provide a valid email adress and a request for 1 or more seats.");
+      System.out.println("Please provide a valid email address and a request for 1 or more seats.");
       return null;
     }
 
