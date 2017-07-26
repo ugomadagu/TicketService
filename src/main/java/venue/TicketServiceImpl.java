@@ -17,6 +17,7 @@ public class TicketServiceImpl implements TicketService {
     seatArray = new SeatStatus[freeSeats];
     Arrays.fill(seatArray, SeatStatus.FREE);
     beginningSeats = new TreeSet<Integer>();
+    beginningSeats.add(0);
     idToSeatHoldMap = new HashMap<Integer, SeatHold>();
   }
 
