@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: "jacoco"
 
 repositories {
    jcenter()
@@ -10,7 +11,18 @@ dependencies {
 }
 
 test {
+    dependsOn 'cleanTest'
     testLogging {
         events "passed", "skipped", "failed"
+    }
+
+}
+
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
     }
 }
