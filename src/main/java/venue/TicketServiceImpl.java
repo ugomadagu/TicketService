@@ -75,17 +75,14 @@ public class TicketServiceImpl implements TicketService {
   public String reserveSeats(int seatHoldId, String customerEmail) {
     synchronized(idToSeatHoldMap) {
       if(!idToSeatHoldMap.containsKey(seatHoldId) || !isValidEmail(customerEmail)) {
-        System.out.println("Not a valid seatHoldId or email address.");
+        System.out.println("Not a valid seatHoldId, Seathold no longer exists, or email address is invalid.");
         return null;
       }
 
       SeatHold hold = idToSeatHoldMap.get(seatHoldId);
       if(hold.getCustomerEmail().equals(customerEmail)) { //if correct email was given
-        if(hold.getSeatStatus(seatArray) == SeatStatus.FREE) {
-          System.out.println("Sorry, but this hold has expired");
-          return null;
-        } else if(hold.getSeatStatus(seatArray) == SeatStatus.RESERVED) { // Shouldn't be possible to get here, but just covering bases
-          System.out.println("These seats have already been reserved.");
+        if(hold.getSeatStatus(seatArray) == SeatStatus.RESERVED) {
+          System.out.println("You have already reserved these seats.");
           return null;
         } else if(hold.getSeatStatus(seatArray) == SeatStatus.HELD){
           hold.setSeatStatus(seatArray, SeatStatus.RESERVED);
