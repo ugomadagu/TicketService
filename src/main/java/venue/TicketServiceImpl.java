@@ -3,6 +3,8 @@ package venue;
 import java.util.TreeSet;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TicketServiceImpl implements TicketService {
   public final int CAPACITY;
@@ -109,6 +111,9 @@ public class TicketServiceImpl implements TicketService {
   }
 
   private boolean isValidEmail(String email) {
-    return true;
+    String pattern = "[a-z-A-Z-\\d-_]+@[a-z-A-Z-\\d]+\\.[a-z-A-Z]+";
+    Pattern r = Pattern.compile(pattern);
+    Matcher m = r.matcher(email);
+    return m.find();
   }
 }

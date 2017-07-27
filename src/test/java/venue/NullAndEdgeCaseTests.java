@@ -48,4 +48,14 @@ public class NullAndEdgeCaseTests {
      SeatHold hold = ticketService.findAndHoldSeats(0, "ugo@gmail.com");
      assertEquals(hold, null);
    }
+
+   @Test
+   public void RequestHoldWithBadEmail() {
+     ticketService = new TicketServiceImpl(100, 5);
+     SeatStatus[] seatArray = ticketService.getSeatArray();
+
+     SeatHold hold = ticketService.findAndHoldSeats(20, "Badman45@googleorg");
+     assertEquals(hold, null);
+
+   }
 }
