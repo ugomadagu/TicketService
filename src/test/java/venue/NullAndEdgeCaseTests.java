@@ -10,7 +10,7 @@ public class NullAndEdgeCaseTests {
 
    @Test
    public void ReserveAllSeatsSuccess() {
-     ticketService = new TicketServiceImpl(100, 5);
+     ticketService = new TicketServiceImpl(100, 2);
      SeatStatus[] seatArray = ticketService.getSeatArray();
 
      SeatHold hold = ticketService.findAndHoldSeats(100, "ugo@gmail.com");
@@ -26,7 +26,7 @@ public class NullAndEdgeCaseTests {
 
    @Test
    public void ReserveAllSeatsFailure() {
-     ticketService = new TicketServiceImpl(100, 5);
+     ticketService = new TicketServiceImpl(100, 2);
      SeatStatus[] seatArray = ticketService.getSeatArray();
 
      SeatHold hold = ticketService.findAndHoldSeats(100, "ugo@gmail.com");
@@ -34,7 +34,7 @@ public class NullAndEdgeCaseTests {
 
      TestTools.confirmSeatSegmentStatus(seatArray, 0, 99, SeatStatus.HELD);
 
-     TestTools.wait(6);
+     TestTools.wait(3);
 
      ticketService.reserveSeats(holdId, "ugo@gmail.com");
      TestTools.confirmSeatSegmentStatus(seatArray, 0, 99, SeatStatus.FREE);
@@ -42,7 +42,7 @@ public class NullAndEdgeCaseTests {
 
    @Test
    public void RequestHoldWithZeroSeats() {
-     ticketService = new TicketServiceImpl(100, 5);
+     ticketService = new TicketServiceImpl(100, 1);
      SeatStatus[] seatArray = ticketService.getSeatArray();
 
      SeatHold hold = ticketService.findAndHoldSeats(0, "ugo@gmail.com");
@@ -51,11 +51,22 @@ public class NullAndEdgeCaseTests {
 
    @Test
    public void RequestHoldWithBadEmail() {
-     ticketService = new TicketServiceImpl(100, 5);
+     ticketService = new TicketServiceImpl(100, 1);
      SeatStatus[] seatArray = ticketService.getSeatArray();
 
      SeatHold hold = ticketService.findAndHoldSeats(20, "Badman45@googleorg");
      assertEquals(hold, null);
+   }
 
+   @Test
+   public void ReserveSeatsWithWrongEmail() {
+     ticketService = new TicketServiceImpl(100, 1);
+     SeatStatus[] seatArray = ticketService.getSeatArray();
+
+     SeatHold hold = ticketService.findAndHoldSeats(20, "ugo@gmail.com");
+     int holdId = hold.getId();
+
+     String confirmationCode = ticketService.reserveSeats(holdId, "notme@hotmail.com");
+     assertEquals(confirmationCode, null);
    }
 }
