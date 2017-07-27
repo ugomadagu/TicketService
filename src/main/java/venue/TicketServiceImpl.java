@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Random;
 
 public class TicketServiceImpl implements TicketService {
   public final int CAPACITY;
@@ -89,7 +90,7 @@ public class TicketServiceImpl implements TicketService {
         } else if(hold.getSeatStatus(seatArray) == SeatStatus.HELD){
           hold.setSeatStatus(seatArray, SeatStatus.RESERVED);
         }
-        return makeConfirmationCode(seatHoldId, customerEmail);
+        return makeConfirmationCode();
       } else {
         System.out.println("That is not the email address we have on record for this hold. Please try again.");
         return null;
@@ -106,8 +107,30 @@ public class TicketServiceImpl implements TicketService {
   }
 
 
-  private String makeConfirmationCode(int seatHoldId, String customerEmail) {
-    return "Do later";
+  private String makeConfirmationCode() {
+    Random rand = new Random();
+
+    int charNum;
+    int letterOrNumberNum;
+    StringBuilder confirmationCode = new StringBuilder();
+
+    for(int i = 0; i < 20; i++) {
+      letterOrNumberNum = rand.nextInt(2) + 1;
+      char newChar;
+      if(letterOrNumberNum == 1) { //Use a letter
+        charNum = rand.nextInt(26) + 1;
+        charNum += 64;
+        newChar = (char)charNum;
+      } else { //Use a number
+        charNum = rand.nextInt(10) + 1;
+        charNum += 47;
+        newChar = (char)charNum;
+      }
+      confirmationCode.append(newChar);
+    }
+    
+    return confirmationCode.toString();
+
   }
 
   private boolean isValidEmail(String email) {
