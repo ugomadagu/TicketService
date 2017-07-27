@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 
 public class TicketServiceImpl implements TicketService {
+  public final int CAPACITY;
   private int freeSeats;
   private int numOfSecondsUntilHoldExpires;
   private SeatStatus[] seatArray;
@@ -12,7 +13,7 @@ public class TicketServiceImpl implements TicketService {
   private HashMap<Integer, SeatHold> idToSeatHoldMap;
 
   public TicketServiceImpl(int freeSeats, int numOfSecondsUntilHoldExpires) {
-    this.freeSeats = freeSeats;
+    CAPACITY = this.freeSeats = freeSeats;
     this.numOfSecondsUntilHoldExpires = numOfSecondsUntilHoldExpires;
     seatArray = new SeatStatus[freeSeats];
     Arrays.fill(seatArray, SeatStatus.FREE);
@@ -38,14 +39,14 @@ public class TicketServiceImpl implements TicketService {
     SeatHold hold;
     synchronized(idToSeatHoldMap) {
       if(freeSeats < numSeats) {
-        System.out.println("I'm sorry, we only have " + freeSeats + " available.");
+        System.out.println("I'm sorry, we only have " + freeSeats + " seats available.");
         return null;
       }
-      freeSeats =- numSeats; // Since we already checked that we have enough seats, we can preemptivley adjust our number of free seats.
-
+      freeSeats -= numSeats; // Since we already checked that we have enough seats, we can preemptivley adjust our number of free seats.
       hold = new SeatHold(customerEmail);
+      int currSeat = -1;
       while(numSeats > 0) {
-        int currSeat = beginningSeats.pollFirst();
+        currSeat = beginningSeats.pollFirst();
         while(numSeats > 0) {
           if(seatArray[currSeat] == SeatStatus.FREE) {
             hold.addSeat(currSeat);
@@ -57,10 +58,16 @@ public class TicketServiceImpl implements TicketService {
         }
       }
 
+      if(currSeat < CAPACITY && seatArray[currSeat] == SeatStatus.FREE) {
+        beginningSeats.add(currSeat);
+      }
+
       idToSeatHoldMap.put(hold.getId(), hold);
       Runnable r = new ExpiredHoldChecker(hold.getId(), numOfSecondsUntilHoldExpires, this, idToSeatHoldMap, beginningSeats);
       new Thread(r).start();
     }
+
+
 
     return hold;
   }
