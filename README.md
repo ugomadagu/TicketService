@@ -1,6 +1,6 @@
 ## Overview
 This is a multithreaded application that simulates an efficient ticket distribution service for a venue. Here is a high level overview of my implementation:
-1. A customer will provide thier email address and the number of seats that they wish to place on hold. If there are enough free seats available, a SeatHold object is created that contains the free seats that are closest to the stage . 
+1. A customer will provide thier email address and the number of seats that they wish to place on hold. If there are enough free seats available, a SeatHold object is created that contains the free seats that are closest to the stage. 
 2. After the SeatHold object is created and the seats officailly put in a "HELD" status, a thread is started and passed the Id of the SeatHold object that was just created. This new thread will wait for X seconds and then if the status of the seats in that SeatHold are still "HELD", then the thread frees those seats and gets rid of the SeatHold object, since it has expired.
 3. A customer will next try to reserve a hold by passing in the Id of thier hold and thier email address. If the SeatHold object corresponding to the Id cannot be found or if the email is invalid/incorrect, then we do not move forward. If all is well, we move forward. If the status of the seats in the SeatHold object is "HELD", we change these statuses to "RESERVED". If the status is already "RESERVED", we do nothing because the seats have already been reserved by the user. 
 
