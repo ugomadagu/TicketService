@@ -16,6 +16,7 @@ public class TicketServiceImpl implements TicketService {
   private HashMap<Integer, SeatHold> idToSeatHoldMap;
 
   public TicketServiceImpl(int freeSeats, int numOfSecondsUntilHoldExpires) {
+    super();
     CAPACITY = this.freeSeats = freeSeats;
     this.numOfSecondsUntilHoldExpires = numOfSecondsUntilHoldExpires;
     seatArray = new SeatStatus[freeSeats];
@@ -128,7 +129,7 @@ public class TicketServiceImpl implements TicketService {
       }
       confirmationCode.append(newChar);
     }
-    
+
     return confirmationCode.toString();
 
   }
