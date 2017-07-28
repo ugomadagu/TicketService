@@ -8,10 +8,10 @@
 Please build before running tests.
 
 ### Build
-```gradle build```
+```./gradlew build```
 
 ### Run tests and generate code coverage report
-```gradle test jacocoTestReport```
+```./gradlew test jacocoTestReport```
 After running the above command, the code coverage report can be accessed at "TickerService/build/reports/coverage/index.html"
 
 
