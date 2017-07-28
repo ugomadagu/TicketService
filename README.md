@@ -1,5 +1,8 @@
 ## Overview
-This is a multithreaded application that simulates an efficient ticket distribution service for a venue.
+This is a multithreaded application that simulates an efficient ticket distribution service for a venue. Here is a high level overview of my implementation:
+1. A customer will provide thier email address and the number of seats that they wish to place on hold. If there are enough free seats available, a SeatHold object is created that contains the best seats in the venue. 
+2. After the SeatHold object is created and the seats officailly put in a "HELD" status, a thread is started and passed the Id of the SeatHold object that was just created. This new thread will wait for X seconds and then if the status of the seats in that SeatHold are still "HELD", then the thread frees those seats and gets rid of the SeatHold object, since it has expired.
+3. A customer will next try to reserve a hold by passing in the Id of thier hold and thier email address. If the SeatHold object corresponding to the Id cannot be found or if the email is invalid/incorrect, then we do not move forward. If all is well, we move forward. If the status of the seats in the SeatHold object is "HELD", we change these statuses to "RESERVED". If the status is already "RESERVED", we do nothing because the seats have already been reserved by the user. 
 
 ## How to build and test source code
 Please build before running tests.
@@ -23,6 +26,7 @@ In this section, I will explain why I took the design approaches that I did for 
 * All seats in a row were equally valuable. Meaning, seats in the front row that were on the far left or far right of the stage were just as valuable as front row seats in the middle of the stage. Therefore, it makes the most sense to fill seats from left to right, or, lowest seat id to highest seat id.
 * The the number of seats in the venue would not change.
 * I was not entirley sure what the **customerEmail** feild was for, therefore, I used it as a form of authentication. A user must reserve seats with the same email that they used to put a hold on those seats.
+* It is acceptable to simply return null when methods were not provided with acceptable parameters.
 
 
 ### TicketServiceImpl  
