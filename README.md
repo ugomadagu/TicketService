@@ -2,7 +2,7 @@
 
 
 ## Overview
-
+This is a multithreaded application that simulates an efficient ticket distribution service for a venue.
 
 ## How to build and test source code
 Please build before running tests.
