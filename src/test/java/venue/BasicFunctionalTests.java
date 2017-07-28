@@ -2,6 +2,7 @@ package venue;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import venue.*;
 import util.TestTools;
 
@@ -91,6 +92,19 @@ public class BasicFunctionalTests {
 
      assertEquals(ticketService.numSeatAvailable(), 78);
 
+   }
+
+   @Test
+   public void CheckConfirmationCodeTest() {
+     ticketService = new TicketServiceImpl(100, 2);
+     SeatStatus[] seatArray = ticketService.getSeatArray();
+
+     SeatHold hold = ticketService.findAndHoldSeats(5, "ugo@gmail.com");
+     int holdId = hold.getId();
+
+     String code = ticketService.reserveSeats(holdId, "ugo@gmail.com");
+
+     assertNotEquals(code, null);
    }
 
 }
