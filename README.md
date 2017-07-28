@@ -1,6 +1,3 @@
-
-
-
 ## Overview
 This is a multithreaded application that simulates an efficient ticket distribution service for a venue.
 
@@ -20,14 +17,15 @@ After running the above command, the code coverage report can be accessed at "Ti
 In this section, I will explain why I took the design approaches that I did for the **TicketServiceImpl** and **SeatHold** classes. I will only discuss these classes because I feel that the others are more self-explanitory. In order to make this section concise and to the point, I will only explain the processes that I thought were the most interesting, but I am more than willing to discuss any other part of the codebase. I will discuss my: assumptions, data structures, time complexities, and space complexities.
 
 
-### TicketServiceImpl
-- Assumptions
-  * Upon creation, the **TicketServiceImpl** class would be given two parameters in its constructor: the number of maximum seats the venue has, and the time limit before a seat hold expires.
-  * No matter what the shape of the venue would be, every seat would be sequentially numbered, with the lower numbers being closest to the stage.
-  * All seats in a row were equally valuable. Meaning, seats in the front row that were on the far left or far right of the stage were just as valuable as front row seats in the middle of the stage. Therefore, it makes the most sense to fill seats from left to right, or, lowest seat id to highest seat id.
-  * The the number of seats in the venue would not change.
-  * I was not entirley sure what the **customerEmail** feild was for, therefore, I used it as a form of authentication. A user must reserve seats with the same email that they used to put a hold on those seats.
-  
+### Assumptions
+* Upon creation, the **TicketServiceImpl** class would be given two parameters in its constructor: the number of maximum seats the venue has, and the time limit before a seat hold expires.
+* No matter what the shape of the venue would be, every seat would be sequentially numbered, with the lower numbers being closest to the stage.
+* All seats in a row were equally valuable. Meaning, seats in the front row that were on the far left or far right of the stage were just as valuable as front row seats in the middle of the stage. Therefore, it makes the most sense to fill seats from left to right, or, lowest seat id to highest seat id.
+* The the number of seats in the venue would not change.
+* I was not entirley sure what the **customerEmail** feild was for, therefore, I used it as a form of authentication. A user must reserve seats with the same email that they used to put a hold on those seats.
+
+
+### TicketServiceImpl  
 - Data Structures:
   * **SeatStatus** is an enumeration used to make the status of a seat easier to read and set.
   * **seatArray** is an array of SeatStatus. Each index represnts the seat number for that particular seat and the value that the index points to represents that seat's current status. I chose an array because of it constant access and insertion time.
