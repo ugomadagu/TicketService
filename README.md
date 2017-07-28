@@ -12,7 +12,7 @@ Please build before running tests.
 
 ### Run tests and generate code coverage report
 ```./gradlew test jacocoTestReport```   
-After running the above command, the code coverage report can be accessed at "TickerService/build/reports/coverage/index.html"
+After running the above command, the code coverage report can be accessed at "TickerService/build/reports/coverage/index.html". Current code coverage is 91%.
 
 
 
