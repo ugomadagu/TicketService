@@ -54,7 +54,7 @@ public class SituationalTests {
    }
 
    @Test
-   public void freeUpSeatsAtTheEnd(){
+   public void FreeUpSeatsAtTheEnd(){
      ticketService = new TicketServiceImpl(100, 2);
      SeatStatus[] seatArray = ticketService.getSeatArray();
 
