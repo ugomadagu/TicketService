@@ -1,4 +1,4 @@
-Table of Contents
+# Table of Contents
 - [Overview](#overview)
 - [How to build and test source code](#how-to-build-and-test-source-code)
   * [Build](#build)
