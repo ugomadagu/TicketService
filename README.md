@@ -17,7 +17,7 @@ After running the above command, the code coverage report can be accessed at "Ti
 
 
 ## Class Design Decisions
-In this section, I will explain why I took the design approaches that I did for the **TicketServiceImpl** and **SeatHold** classes. I will only discuss these sections because I feel that the others are more self-explanitory. In order to make this section concise and to the point, I will only explain the processes that I thought were the most interesting. I will discuss my: assumptions, data structures, time complexities, and space complexities.
+In this section, I will explain why I took the design approaches that I did for the **TicketServiceImpl** and **SeatHold** classes. I will only discuss these classes because I feel that the others are more self-explanitory. In order to make this section concise and to the point, I will only explain the processes that I thought were the most interesting. I will discuss my: assumptions, data structures, time complexities, and space complexities.
 
 
 ### TicketServiceImpl
