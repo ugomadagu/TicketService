@@ -39,7 +39,7 @@ In this section, I will explain why I took the design approaches that I did for 
 
 
 ### SeatHold
-  - Data Structures:
-    * **seats** is a LinkedList that I used to store all the Id's allighned to a particular seatHold. I chose a LinkedList mostly becasue of its constant insertion time and O(n) space requirements. The O(n) access time does not negativley effect me since I only ever need to access the elements in **seats** in a linear fashion or by retreiving only first element.
+ - Data Structures:
+  * **seats** is a LinkedList that I used to store all the Id's allighned to a particular seatHold. I chose a LinkedList mostly becasue of its constant insertion time and O(n) space requirements. The O(n) access time does not negativley effect me since I only ever need to access the elements in **seats** in a linear fashion or by retreiving only first element.
    
 
