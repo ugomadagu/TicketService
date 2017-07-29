@@ -53,7 +53,7 @@ In this section, I will explain why I took the design approaches that I did for 
 ### TicketServiceImpl Class
 - Data Structures:
   * **SeatStatus** is an enumeration used to make the status of a seat easier to read and set.
-  * **seatArray** is an array of SeatStatus. Each index represnts the seat number for that particular seat and the value that the index points to represents that seat's current status. I chose an array because of it constant access and insertion time.
+  * **seatArray** is an array of SeatStatus. Each index represents the seat number for that particular seat and the value that the index points to represents that seat's current status. I chose an array because of it constant access and insertion time.
   * **beginningSeats** is a TreeSet that is used to keep track of the beginning of every section of open seats. For example, the 0th seat is the beginning of an open section (the open section being the entire venue) when we first start, since no one has reserved/held seats. If a customer grabs seats 0-10, 11 is now the beginning of an open section of seats. I chose a TreeSet to represent this data because I need to keep the beginnings of my open sections ordered for quick retrival (If there are open seats in the front row, we don't want to grab open seats in the back). We get a log(n) average time for insertion, deletion, and removal, which is acceptable.
   * **idToSeatHoldMap** is a HashMap that maps an Id to a SeatHold. I used a HashMap becasue of its O(1) access, insertion, and deletion time. Also because of its reasonable O(n) space requirement.
   
