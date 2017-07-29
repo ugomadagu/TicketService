@@ -29,11 +29,11 @@ Please build before running tests.
 After running the above command, the code coverage report can be accessed at "TickerService/build/reports/coverage/index.html". Current code coverage is **91%**.
 
 ### Manually interact with the service via command line
-After building, run ```java -cp build/classes/java/main venue.CliMain``` from the TickerService directory. The commands for interacting with the service are as follows:
-- ```createNewService {venue_capacity} {seconds_until_hold_expires}``` Creates a brand new service with the parameters you provide. When you first start the program, a service is initialized with 100 free seats and a 10 second wait time for holds.
+After building, run ```java -cp build/classes/java/main venue.CliMain``` from the top-level TicketService directory to start the application. The commands for interacting with the service are as follows:
+- ```createNewService {venue_capacity} {seconds_until_hold_expires}``` Creates a new TicketService instance with the parameters you provide. When you first start the program, a default TicketService instance is initialized with 100 free seats and a 10 second wait time for holds. If you try to make a TicketService with too high of a venue_capacity, you run the risk of crashing the program due to a "java.lang.OutOfMemoryError" error. However, integer overflow (higher than 2147483647) is taken care of.
 - ```getNumSeatAvailable``` Returns the number of available seats.
 - ```findAndHoldSeats {num_seats_to_hold} {customer_email}``` Creates a SeatHold with num_seats_to_hold if there are enough free seats. Prints the SeatHold Id.
-- ```reserveSeats {seat_hold_id} {customer_email}``` Reserves the seats inside of the SeatHold refferenced by the provided seat_hold_id. Uses the customer_email to authenticate the user. Returns a confirmation code.
+- ```reserveSeats {seat_hold_id} {customer_email}``` Reserves the seats inside of the SeatHold referenced by the provided seat_hold_id parameter. Uses the customer_email to authenticate the user. Returns a confirmation code.
 - ```exit``` Exits the program.
 
 
@@ -53,12 +53,12 @@ In this section, I will explain why I took the design approaches that I did for 
 ### TicketServiceImpl Class
 - Data Structures:
   * **SeatStatus** is an enumeration used to make the status of a seat easier to read and set.
-  * **seatArray** is an array of SeatStatus. Each index represnts the seat number for that particular seat and the value that the index points to represents that seat's current status. I chose an array because of it constant access and insertion time.
+  * **seatArray** is an array of SeatStatus. Each index represents the seat number for that particular seat and the value that the index points to represents that seat's current status. I chose an array because of it constant access and insertion time.
   * **beginningSeats** is a TreeSet that is used to keep track of the beginning of every section of open seats. For example, the 0th seat is the beginning of an open section (the open section being the entire venue) when we first start, since no one has reserved/held seats. If a customer grabs seats 0-10, 11 is now the beginning of an open section of seats. I chose a TreeSet to represent this data because I need to keep the beginnings of my open sections ordered for quick retrival (If there are open seats in the front row, we don't want to grab open seats in the back). We get a log(n) average time for insertion, deletion, and removal, which is acceptable.
   * **idToSeatHoldMap** is a HashMap that maps an Id to a SeatHold. I used a HashMap becasue of its O(1) access, insertion, and deletion time. Also because of its reasonable O(n) space requirement.
   
 - Methods:
-  * **makeConfirmationCode** is the method that I made to create the confirmation code that is returned by **reserveSeats**. This method creates a 20 character alphanumeric. For every character, it randomly generates a digit, either 1 or 2, that determines whether the next character will be a letter or number. With that information, we then generate a random digit that will be later converted into a _char_ based on ASCI conversion.
+  * **makeConfirmationCode** is the method that I made to create the confirmation code that is returned by the **reserveSeats** method. This method creates a 20 character alphanumeric. For every character, it randomly generates a digit, either 1 or 2, that determines whether the character will be a letter or number. With that information, we then generate a random digit that will be later converted into a _char_ based on ASCI conversion.
 
 
 ### SeatHold Class
