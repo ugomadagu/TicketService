@@ -34,7 +34,7 @@ After building, run ```java -cp build/classes/java/main venue.CliMain``` from th
 - ```getNumSeatAvailable``` Returns the number of available seats.
 - ```findAndHoldSeats {num_seats_to_hold} {customer_email}``` Creates a SeatHold with num_seats_to_hold if there are enough free seats. Prints the SeatHold Id.
 - ```reserveSeats {seat_hold_id} {customer_email}``` Reserves the seats inside of the SeatHold refferenced by the provided seat_hold_id. Uses the customer_email to authenticate the user. Returns a confirmation code.
-- ```exit``` Exists the program.
+- ```exit``` Exits the program.
 
 
 ## Class Design Decisions
