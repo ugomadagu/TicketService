@@ -58,7 +58,7 @@ In this section, I will explain why I took the design approaches that I did for 
   * **idToSeatHoldMap** is a HashMap that maps an Id to a SeatHold. I used a HashMap becasue of its O(1) access, insertion, and deletion time. Also because of its reasonable O(n) space requirement.
   
 - Methods:
-  * **makeConfirmationCode** is the method that I made to create the confirmation code that is returned by **reserveSeats**. This method creates a 20 character alphanumeric. For every character, it randomly generates a digit, either 1 or 2, that determines whether the next character will be a letter or number. With that information, we then generate a random digit that will be later converted into a _char_ based on ASCI conversion.
+  * **makeConfirmationCode** is the method that I made to create the confirmation code that is returned by the **reserveSeats** method. This method creates a 20 character alphanumeric. For every character, it randomly generates a digit, either 1 or 2, that determines whether the next character will be a letter or number. With that information, we then generate a random digit that will be later converted into a _char_ based on ASCI conversion.
 
 
 ### SeatHold Class
