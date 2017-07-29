@@ -3,6 +3,7 @@
 - [How to build and test source code](#how-to-build-and-test-source-code)
   * [Build](#build)
   * [Run tests and generate code coverage report](#run-tests-and-generate-code-coverage-report)
+  * [Manually interact with the service via command line](#how-to-build-and-test-source-code)
 - [Class Design Decisions](#class-design-decisions)
   * [Assumptions](#assumptions)
   * [TicketServiceImpl Class](#ticketserviceimpl-class)
@@ -27,7 +28,7 @@ Please build before running tests.
 ```./gradlew test jacocoTestReport```   
 After running the above command, the code coverage report can be accessed at "TickerService/build/reports/coverage/index.html". Current code coverage is **91%**.
 
-### Run your own tests and manually interact with the service via command line
+### Manually interact with the service via command line
 After building, run ```java -cp build/classes/java/main venue.CliMain``` from the TickerService directory. The commands for interacting with the service are as follows:
 - ```createNewService {venue_capacity} {seconds_until_hold_expires}``` Creates a brand new service with the parameters you provide. When you first start the program, a service is initialized with 100 free seats and a 10 second wait time for holds.
 - ```getNumSeatAvailable``` Returns the number of available seats.
