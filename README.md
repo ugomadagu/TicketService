@@ -29,11 +29,11 @@ Please build before running tests.
 After running the above command, the code coverage report can be accessed at "TickerService/build/reports/coverage/index.html". Current code coverage is **91%**.
 
 ### Manually interact with the service via command line
-After building, run ```java -cp build/classes/java/main venue.CliMain``` from the TicketService directory. The commands for interacting with the service are as follows:
-- ```createNewService {venue_capacity} {seconds_until_hold_expires}``` Creates a brand new service with the parameters you provide. When you first start the program, a service is initialized with 100 free seats and a 10 second wait time for holds.
+After building, run ```java -cp build/classes/java/main venue.CliMain``` from the top-level TicketService directory to start the application. The commands for interacting with the service are as follows:
+- ```createNewService {venue_capacity} {seconds_until_hold_expires}``` Creates a new TicketService instance with the parameters you provide. When you first start the program, a default TicketService instance is initialized with 100 free seats and a 10 second wait time for holds.
 - ```getNumSeatAvailable``` Returns the number of available seats.
 - ```findAndHoldSeats {num_seats_to_hold} {customer_email}``` Creates a SeatHold with num_seats_to_hold if there are enough free seats. Prints the SeatHold Id.
-- ```reserveSeats {seat_hold_id} {customer_email}``` Reserves the seats inside of the SeatHold refferenced by the provided seat_hold_id. Uses the customer_email to authenticate the user. Returns a confirmation code.
+- ```reserveSeats {seat_hold_id} {customer_email}``` Reserves the seats inside of the SeatHold referenced by the provided seat_hold_id parameter. Uses the customer_email to authenticate the user. Returns a confirmation code.
 - ```exit``` Exits the program.
 
 
