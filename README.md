@@ -3,7 +3,7 @@
 - [How to build and test source code](#how-to-build-and-test-source-code)
   * [Build](#build)
   * [Run tests and generate code coverage report](#run-tests-and-generate-code-coverage-report)
-  * [Manually interact with the service via command line](#how-to-build-and-test-source-code)
+  * [Manually interact with the service via command line](#manually-interact-with-the-service-via-command-line)
 - [Class Design Decisions](#class-design-decisions)
   * [Assumptions](#assumptions)
   * [TicketServiceImpl Class](#ticketserviceimpl-class)
