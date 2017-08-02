@@ -30,9 +30,21 @@ public class ExpiredHoldChecker implements Runnable {
        if(hold.getSeatStatus(ticketService.getSeatArray()) == SeatStatus.HELD) {
          hold.setSeatStatus(ticketService.getSeatArray(), SeatStatus.FREE);
          ticketService.addFreeSeats(hold.getNumOfSeats());
-         beginningSeats.add(hold.getFirstSeat());
+         updateBeginningSeats(hold);
          idToSeatHoldMap.remove(seatHoldId);
        }
+     }
+   }
+
+   private void updateBeginningSeats(SeatHold hold) {
+     for(int previousBeginningSeat : hold.getPreviousBeginningSeats()) {
+       if(previousBeginningSeat - 1 < 0 || ticketService.getSeatArray()[previousBeginningSeat - 1] == SeatStatus.HELD || ticketService.getSeatArray()[previousBeginningSeat - 1] == SeatStatus.RESERVED) {
+         beginningSeats.add(previousBeginningSeat);
+       }
+     }
+
+     if(hold.getLastSeat() + 1 < ticketService.getSeatArray().length) {
+       beginningSeats.remove(hold.getLastSeat() + 1);
      }
    }
 }

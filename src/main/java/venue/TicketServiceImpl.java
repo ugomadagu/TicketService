@@ -51,6 +51,7 @@ public class TicketServiceImpl implements TicketService {
       int currSeat = -1;
       while(numSeats > 0) {
         currSeat = beginningSeats.pollFirst();
+        hold.addPreviousBeginningSeat(currSeat);
         while(numSeats > 0) {
           if(seatArray[currSeat] == SeatStatus.FREE) {
             hold.addSeat(currSeat);
@@ -105,6 +106,10 @@ public class TicketServiceImpl implements TicketService {
 
   public SeatStatus[] getSeatArray() {
     return seatArray;
+  }
+
+  public TreeSet<Integer> getBeginningSeats() {
+    return beginningSeats;
   }
 
 

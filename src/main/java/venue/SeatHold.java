@@ -5,10 +5,20 @@ import java.util.LinkedList;
 public class SeatHold {
   private LinkedList<Integer> seats;
   private String customerEmail;
+  private LinkedList<Integer> previousBeginningSeats;
 
   public SeatHold(String customerEmail) {
     seats = new LinkedList<Integer>();
+    previousBeginningSeats = new LinkedList<Integer>();
     this.customerEmail = customerEmail;
+  }
+
+  public void addPreviousBeginningSeat(int previousBeginningSeat) {
+    previousBeginningSeats.add(previousBeginningSeat);
+  }
+
+  public LinkedList<Integer> getPreviousBeginningSeats() {
+    return previousBeginningSeats;
   }
 
   public void addSeat(int seatNumber) {
@@ -40,6 +50,10 @@ public class SeatHold {
 
   public int getFirstSeat() {
     return seats.peekFirst();
+  }
+
+  public int getLastSeat() {
+    return seats.peekLast();
   }
 
 }

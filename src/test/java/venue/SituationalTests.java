@@ -124,4 +124,22 @@ public class SituationalTests {
      TestTools.confirmSeatSegmentStatus(seatArray, 35, 39, SeatStatus.FREE);
    }
 
+   @Test
+   public void freeSeatsAcrossSegmentsTest() {
+     ticketService = new TicketServiceImpl(100, 2);
+     SeatStatus[] seatArray = ticketService.getSeatArray();
+
+     ticketService.findAndHoldSeats(5, "ugo@gmail.com");
+     SeatHold hold = ticketService.findAndHoldSeats(5, "ugo@gmail.com");
+     int holdId1 = hold.getId();
+     ticketService.reserveSeats(holdId1, "ugo@gmail.com");
+     TestTools.wait(3);
+
+     hold = ticketService.findAndHoldSeats(10, "ugo@gmail.com");
+     TestTools.wait(3);
+
+     assertEquals(ticketService.getBeginningSeats().size(), 2);
+     assertEquals((int)ticketService.getBeginningSeats().pollLast(), 10);
+   }
+
 }
