@@ -140,6 +140,9 @@ public class TicketServiceImpl implements TicketService {
   }
 
   private boolean isValidEmail(String email) {
+    if(email == null) {
+      return false; 
+    }
     String pattern = "[a-z-A-Z-\\d-_]+@[a-z-A-Z-\\d]+\\.[a-z-A-Z]+";
     Pattern r = Pattern.compile(pattern);
     Matcher m = r.matcher(email);
