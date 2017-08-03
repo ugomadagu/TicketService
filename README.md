@@ -44,7 +44,7 @@ In this section, I will explain why I took the design approaches that I did for 
 ### Assumptions
 * Upon creation, the **TicketServiceImpl** class would be given two parameters in its constructor: the number of maximum seats the venue has, and the time limit before a seat hold expires.
 * No matter what the shape of the venue would be, every seat would be sequentially numbered, with the lower numbers being closest to the stage. Therefore, I used an array to represent the seats.
-* The the number of seats in the venue would not change.
+* The the number of seats in the venue would not change. If we want to change the number of seats in a venue, we will create a new TicketServiceImpl instance.
 * All seats in a row were equally valuable. Meaning, seats in the front row that were on the far left or far right of the stage were just as valuable as front row seats in the middle of the stage. Therefore, it makes the most sense to fill seats from left to right, or, lowest seat id to highest seat id.
 * I was not entirley sure what the **customerEmail** feild was for, therefore, I used it as a form of authentication. A user must reserve seats with the same email that they used to put a hold on those seats.
 * It is acceptable to simply return null when methods were not provided with acceptable parameters.
