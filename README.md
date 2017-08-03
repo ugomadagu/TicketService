@@ -63,6 +63,6 @@ In this section, I will explain why I took the design approaches that I did for 
 
 ### SeatHold Class
 - Data Structures:
-  * **seats** is a LinkedList that I used to store all the seat Id's aligned to a particular seatHold. I chose a LinkedList because of its constant insertion time and O(n) space requirements. The O(n) search time does not negativley effect me since I only ever need to access the elements of **seats** in a linear fashion or by retreiving only first element.
+  * **seats** is a LinkedList that I used to store all the seat Id's aligned to a particular seatHold. I chose a LinkedList because of its constant insertion time and O(n) space requirements. The O(n) search time does not negativley effect me since I only ever need to access the elements of **seats** in a linear fashion or by retreiving only the first element.
    
 
